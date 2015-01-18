@@ -11,7 +11,6 @@ export(diffHicUsersGuide,
     squareCounts, connectCounts, marginCounts, totalCounts, 
     correctedContact, normalizeCNV, matchMargins,
     getDistance, getArea,
-	enrichedGap,
     boxPairs, clusterPairs,
     plotPlaid, rotPlaid, plotDI, rotDI)
 
