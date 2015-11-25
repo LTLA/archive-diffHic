@@ -37,8 +37,7 @@ exportMethods(
 import(Rsamtools,GenomicRanges,Biostrings,BSgenome,rhdf5,
 	IRanges,S4Vectors,GenomeInfoDb,
 	edgeR,limma,locfit,methods,csaw,
-    InteractionSet,SummarizedExperiment
-)
+	SummarizedExperiment)
 	
 importFrom("BiocGenerics", counts)
 
