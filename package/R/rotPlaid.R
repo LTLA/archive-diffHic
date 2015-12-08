@@ -111,8 +111,11 @@ rotDI <- function(data, fc, region, col.up="red", col.down="blue",
 #
 # written by Aaron Lun
 # created 18 September 2014
-# last modified 22 November 2015
+# last modified 8 December 2015
 {
+    # Checking for proper type.
+    .check_StrictGI(data)
+
 	xchr <- as.character(seqnames(region))
 	xstart <- start(region)
 	xend <- end(region)
@@ -121,14 +124,13 @@ rotDI <- function(data, fc, region, col.up="red", col.down="blue",
 	# Setting up the boundaries.
 	x.min <- max(1L, xstart)
 	x.max <- min(seqlengths(regions(data))[[xchr]], xend)
-<<<<<<< HEAD
-	if (x.min >= x.max) { stop("invalid ranges supplied") }
-	max.height <- x.max - x.min
-=======
 	if (x.min >= x.max) { stop("invalid anchor/target ranges supplied") }
 	x.range <- x.max - x.min 
     if (is.null(max.height)) { max.height <- x.range }
->>>>>>> bf15161... Updated rotPlaid/DI to have max.height parameter.
+
+    # Checking that our points are consistent.
+    nr <- nrow(data)
+    if (nr!=length(fc)) { stop("length of fold-change vector should equal number of bin pairs") }
 						
 	# Identifying the fragments in our ranges of interest.
 	ref.keep <- overlapsAny(regions(data), region, maxgap=max.height*0.7)
