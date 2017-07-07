@@ -29,7 +29,8 @@ exportClasses(
 import(Rsamtools,Rhtslib,GenomicRanges,Biostrings,BSgenome,rhdf5,
 	IRanges,S4Vectors,GenomeInfoDb,
 	edgeR,limma,locfit,methods,csaw,
-	SummarizedExperiment)
+    InteractionSet,SummarizedExperiment
+)
 	
 importFrom("BiocGenerics", counts)
 importFrom("grDevices", col2rgb, rgb)

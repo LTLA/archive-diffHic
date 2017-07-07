@@ -81,18 +81,14 @@ rotDI <- function(data, fc, region, col.up="red", col.down="blue",
 	# Setting up the boundaries.
 	xchr <- as.character(seqnames(region))
 	if (length(xchr)!=1L) { stop("exactly one region is required for plotting") }
-<<<<<<< HEAD
-
-	# Setting up the boundaries.
-	x.min <- max(1L, xstart)
-	x.max <- min(seqlengths(regions(data))[[xchr]], xend)
-	if (x.min >= x.max) { stop("invalid anchor/target ranges supplied") }
-=======
 	x.min <- max(1L, start(region))
 	x.max <- min(seqlengths(regions(data))[[xchr]], end(region))
 	if (x.min >= x.max) { stop("invalid ranges supplied") }
->>>>>>> de52deb... Added the extractPatch function for patch counting.
     if (is.null(max.height)) { max.height <- x.max - x.min }
+
+    # Checking that our points are consistent.
+    nr <- nrow(data)
+    if (nr!=length(fc)) { stop("length of fold-change vector should equal number of bin pairs") }
 
     # Identifying the fragments in our ranges of interest.
 	ref.keep <- overlapsAny(regions(data), region, maxgap=max.height*0.7)

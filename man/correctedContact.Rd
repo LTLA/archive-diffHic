@@ -99,13 +99,13 @@ head(stuff$bias)
 head(stuff$max)
 
 # Creating an offset matrix, for use in glmFit.
-anchor.bias <- stuff$bias[anchors(data, id=TRUE),]
-target.bias <- stuff$bias[targets(data, id=TRUE),]
-offsets <- log(anchor.bias * target.bias)
+anchor1.bias <- stuff$bias[anchors(data, type="first", id=TRUE),]
+anchor2.bias <- stuff$bias[anchors(data, type="second", id=TRUE),]
+offsets <- log(anchor1.bias * anchor2.bias)
 
 \dontshow{
 # effective function of offset in GLMs.
-difference <- log(stuff$truth) - (log(counts(data)) - offsets) 
+difference <- log(stuff$truth) - (log(assay(data)) - offsets) 
 stopifnot(all(is.na(difference) | difference < 1e-8))
 }
 
@@ -113,12 +113,12 @@ stopifnot(all(is.na(difference) | difference < 1e-8))
 stuff <- correctedContact(data, average=FALSE, dist.correct=TRUE)
 head(stuff$truth)
 head(stuff$trend)
-offsets <- log(stuff$bias[anchors(data, id=TRUE),]) +
-    log(stuff$bias[targets(data, id=TRUE),]) 
+offsets <- log(stuff$bias[anchors(data, type="first", id=TRUE),]) +
+    log(stuff$bias[anchors(data, type="second", id=TRUE),])
 
 \dontshow{
 hidden.offsets <- offsets + stuff$trend/log2(exp(1))
-difference <- log(stuff$truth) - (log(counts(data)) - hidden.offsets)
+difference <- log(stuff$truth) - (log(assay(data)) - hidden.offsets)
 stopifnot(all(is.na(difference) | difference < 1e-8))
 }
 }
